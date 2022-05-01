@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js" integrity="sha512-NxocnqsXP3zm0Xb42zqVMvjQIktKEpTIbCXXyhBPxqGZHqhcOXHs4pXI/GoZ8lE+2NJONRifuBpi9DxC58L0Lw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js" integrity="sha512-hAm8hj9/2EIonvS+sf0G3anaY8zYHv6q7ktNlLTg8wLwFvhUavnDdH0gif8SA3U1kN0lyKBWbf1wD4+5BfaMMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <h1>Data selfie app</h1>
+    <a href="index.html">enter</a>
+    <a href="all.html">List</a>
+    <script>
+        
+        async function getData(){
+            const res = await fetch('/api')
+            const data = await res.json()
+            for(item of data){
+                const root = document.createElement('div');
+                
+                const geo = document.createElement('div');
+                const image  = document.createElement('img');
+                geo.textContent = `${item.lat} ${item.long}`;
+                image.src = item.image64;
+                root.append(geo,image)
+                document.body.append(root)
+
+            }
+        }
+        getData()
+    </script>
+</body>
+</html>
